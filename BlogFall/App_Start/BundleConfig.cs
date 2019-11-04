@@ -8,6 +8,10 @@ namespace BlogFall
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+
+            bundles.UseCdn = true;
+            bundles.Add(new ScriptBundle("~/bundles/jquery", "https://code.jquery.com/jquery-3.4.1-min.js").Include("~/Scripts/jquery-{version}.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -21,6 +25,12 @@ namespace BlogFall
                       "~/Content/bootstrap.css",
                       "~/Content/fontawesome.css",
                       "~/Content/site.css"));
+
+                #if DEBUG
+                            BundleTable.EnableOptimizations = false;
+                #else
+                            BundleTable.EnableOptimizations = true; //bu yayınlanırken aktif olmalı
+                #endif
         }
     }
 }
