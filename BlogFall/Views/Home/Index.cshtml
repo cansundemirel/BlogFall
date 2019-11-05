@@ -14,26 +14,48 @@
         <h2 class="blog-post-title">@item.Title</h2>
         <p class="blog-post-meta">@item.CreationTime <a href="#">@item.Author.UserName</a></p>
 
-    @Html.Raw(item.Content)
+        @Html.Raw(item.Content)
 
     </div><!-- /.blog-post -->
 }
 
 <nav class="blog-pagination">
-    <a class="btn btn-outline-primary" href="@Url.Action("Index", "Home", new
-                                        {
-                                            cid = ViewBag.cid,
-                                            page = ViewBag.prevPage
-                                        })" >
-
-        Önceki
-    </a>
-    <a class="btn btn-outline-secondary" href="@Url.Action("Index", "Home", new
+    @if (ViewBag.page < ViewBag.pageCount)
+    {
+        <a class="btn btn-outline-primary" href="@Url.Action("Index", "Home", new
                                         {
                                             cid = ViewBag.cid,
                                             page = ViewBag.nextPage
+                                        })">
+
+            &laquo; Daha eski
+        </a>
+
+    }
+    else
+    {
+        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">
+
+            &laquo; Daha eski
+        </a>
+    }
+
+    @if (ViewBag.page > 1)
+    {
+        <a class="btn btn-outline-secondary" href="@Url.Action("Index", "Home", new
+                                        {
+                                            cid = ViewBag.cid,
+                                            page = ViewBag.prevPage
                                         })" tabindex="-1" aria-disabled="true">
 
-        Sonraki
-    </a>
+            Daha yeni &raquo;
+        </a>
+    }
+    else
+    {
+        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">
+            Daha yeni &raquo;
+        </a>
+    }
+
 </nav>
