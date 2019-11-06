@@ -20,9 +20,5 @@ namespace BlogFall.Areas.Admin.Controllers
                 db.Dispose();
             }
         }
-        public ActionResult Index()
-        {
-            return View();
-        }
     }
 }
