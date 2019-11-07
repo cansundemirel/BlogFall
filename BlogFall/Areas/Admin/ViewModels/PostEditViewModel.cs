@@ -23,6 +23,6 @@ namespace BlogFall.Areas.Admin.ViewModels
         [Display(Name = "İçerik")]
         public string Content { get; set; }
 
-        
+
     }
 }
