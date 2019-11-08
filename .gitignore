@@ -262,9 +262,9 @@ __pycache__/
 
 # Kullanýcýnýn yüklediði fotoðraflar
 # yolun içinde ki herþeyi hariç tut
-BlogFall/Upload/Profiles/*
-BlogFall/Upload/Posts/*
+Upload/Profiles/*
+Upload/Posts/*
 
 # exception to the rule
-BlogFall/Upload/Posts/.gitkeep 
-BlogFall/Upload/Profiles/.gitkeep 
+Upload/Posts/.gitkeep 
+Upload/Profiles/.gitkeep 
