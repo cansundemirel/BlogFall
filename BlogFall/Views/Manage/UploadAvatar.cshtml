@@ -18,32 +18,33 @@ else
 @using (Html.BeginForm("UploadAvatar", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+
     <div class="form-group mt-2">
         <label for="File">Bir fotoğraf seçiniz: </label>
-        <input type="file" class="form-control-file" id="File" name="image/*" />
-        @Html.ValidationMessageFor(x => x.File, null, new { @class = "text-danger"})
+        <input type="file" class="form-control-file" id="File" name="File" accept="image/*" />
+        @Html.ValidationMessageFor(x => x.File, null, new { @class = "text-danger" })
     </div>
 
     <a href="@Url.Action("Index", "Manage")" class="btn btn-secondary">İptal</a>
     <button class="btn btn-primary">Gönder</button>
-
-@section scripts {
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#profilePhoto').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $("#File").change(function () {
-            readURL(this);
-        });
-    </script>
 }
+    @section scripts {
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#profilePhoto').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#File").change(function () {
+                readURL(this);
+            });
+        </script>
+    }
 
