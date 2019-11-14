@@ -3,68 +3,63 @@
     ViewBag.Title = "Anasayfa";
 }
 
-
 <h3 class="pb-4 mb-4 font-italic border-bottom">
     @ViewBag.SubTitle
 </h3>
-
 @foreach (var item in Model)
 {
-<div class="blog-post">
-    <h2 class="blog-post-title">
-        <a href="@Url.Action("ShowPost","Home", new { id = item.Id })" class="text-reset text-decoration-none">
-            @item.Title
-        </a>
-    </h2>
-    <p class="blog-post-meta">@item.CreationTime <a href="#">@item.Author.UserName</a></p>
+
+    <div class="blog-post">
+        <h2 class="blog-post-title">
+            <a href="@Url.Action("ShowPost","Home", new {id= item.Id})"
+               class="text-reset text-decoration-none">
+                @item.Title
+            </a>
+        </h2>
+        <p class="blog-post-meta">
+            @item.CreationTime <a href="#">@item.Author.UserName</a>
+            <a href="@Url.Action("ShowPost","Home", new {id= item.Id})#comments">
+                @item.Comments.Count Yorum
+            </a>
+        </p>
 
 
+        @Html.ShowPostIntro(item.Content)
 
-    @Html.ShowPostIntro(item.Content)
-    <p class="text-right">
-        <a href="@Url.Action("ShowPost","Home", new { id = item.Id })">Devamını oku... </a>
-    </p>
-
-</div><!-- /.blog-post -->
+        <div class="d-flex small">
+            <a href="@Url.Action("ShowPost","Home", new { id = item.Id }) #comments"
+               class="d-inline-block">
+                <i class="far fa-comments mr-1"></i> @item.Comments.Count Yorum
+            </a>
+            <a href="@Url.Action("ShowPost","Home", new { id = item.Id })">
+                Devamını oku..
+            </a>
+        </div>
+    </div><!-- /.blog-post -->
 }
 
 <nav class="blog-pagination">
-    @if (ViewBag.page < ViewBag.pageCount)
-    {
-        <a class="btn btn-outline-primary" href="@Url.Action("Index", "Home", new
-                                        {
-                                            cid = ViewBag.cid,
-                                            page = ViewBag.nextPage
-                                        })">
-
-            &laquo; Daha eski
-        </a>
-
-    }
-    else
-    {
-        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">
-
-            &laquo; Daha eski
-        </a>
-    }
 
     @if (ViewBag.page > 1)
     {
-        <a class="btn btn-outline-secondary" href="@Url.Action("Index", "Home", new
-                                        {
-                                            cid = ViewBag.cid,
-                                            page = ViewBag.prevPage
-                                        })" tabindex="-1" aria-disabled="true">
+        <a class="btn btn-outline-primary" href="@Url.Action("Index","Home", new { cid = ViewBag.cid, page = ViewBag.prevPage })"> &laquo; Önceki</a>
+    }
+    else
+    {
+        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true"> &laquo; Önceki</a>
+    }
 
-            Daha yeni &raquo;
-        </a>
+    @if (ViewBag.page < ViewBag.pageCount)
+    {
+        <a class="btn btn-outline-secondary" href="@Url.Action("Index","Home", new { cid = ViewBag.cid, page = ViewBag.nextPage })"> Sonraki &raquo;</a>
     }
     else
     {
         <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">
-            Daha yeni &raquo;
+            Sonraki &raquo;
         </a>
     }
 
+
 </nav>
+
